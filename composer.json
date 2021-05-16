@@ -3,7 +3,7 @@
     "description":"Naver Shopping EP3 PHP Library",
     "keywords":["Naver Shopping","ep3","nshop ep"],
     "type":"library",
-    "license":"BSD-2.0",
+    "license":"MIT",
     "authors":[
         {
             "name":"Jonathan Bak",
