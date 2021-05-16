@@ -12,30 +12,22 @@ $ composer require jonathanbak/navershopep
 ## Start
 네이버쇼핑 연동시 사용할 EP 테이블 생성 
 ```bash
-$ php sql/init.php
+CREATE TABLE `nshop_epitem` (
+    `ne_uid` int(11) NOT NULL COMMENT '고유 상품 번호',
+    `ne_item_hash` varchar(255) DEFAULT NULL COMMENT '변경체크값',
+    `ne_send_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '전송 날짜',
+    `ne_reg_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '전송데이터 등록일',
+    PRIMARY KEY (`ne_uid`),
+    KEY `ix_nshop_epitem_ne_uid_hash` (`ne_uid`,`ne_item_hash`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 ```
 
-## Test
-
-테스트 전 샘플 데이터 생성
+## Sample Test
+샘플 소스 복사하여 참고하세요.
 ```bash
-$ php sql/test_step1.php
-```
+$ cp -rp ./vendor/jonathanbak/navershopep/samples ./samples
 
-phpunit.xml 에 아래 내용을 본인의 MySQL 서버 정보를 넣고
-```bash
-<php>
-    <var name="DB_HOST" value="localhost" />
-    <var name="DB_USER" value="test" />
-    <var name="DB_PASSWD" value="test1234" />
-    <var name="DB_NAME" value="db_test" />
-    <var name="DB_PORT" value="3306" />
-</php>
-```
-phpunit 실행하여 테스트 해봅니다.
-```bash
-$ phpunit
-
+$ cat ./samples/README.md
 ```
 
 ## Usage
@@ -43,8 +35,6 @@ $ phpunit
 1. 각 쇼핑몰에 맞게 NaverShopEp\Shop\AbstractLists, NaverShopEp\Shop\AbstractItem 을 상속받아 클래스 작성해주세요.  
 2. 지정된 연동시간에 맞춰 실행할 EP생성 스크립트 파일을 만들고 cron 등에 등록하여 ep파일을 생성합니다. 
 3. 네이버쇼핑 "쇼핑몰 상품DB URL" 에 등록할 파일 만드셔서 ep파일을 읽어 데이터를 제공합니다.
-
-- samples 폴더의 예제파일들 참고해주세요.
 
 #### 1. 각 쇼핑몰 에 맞게 커스텀 클래스 생성하기
 

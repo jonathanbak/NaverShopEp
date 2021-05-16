@@ -1,9 +1,6 @@
 <?php
-$host = "localhost";
-$user = "test";
-$password = "test1234";
-$dbName = "db_test";
-$dbPort = "3306";
+include_once("./db.inc.php");
+global $host, $user, $password, $dbName, $dbPort;
 
 $dbConn = new \mysqli($host, $user, $password, $dbName, $dbPort);
 
@@ -22,4 +19,6 @@ $query = "CREATE TABLE `nshop_epitem` (
     KEY `ix_nshop_epitem_ne_uid_hash` (`ne_uid`,`ne_item_hash`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
 
-$dbConn->query($query);
+$result = $dbConn->query($query);
+if($result) echo "OK";
+else echo "FAIL";
