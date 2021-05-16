@@ -1,0 +1,31 @@
+{
+    "name": "jonathanbak/navershopep",
+    "description":"Naver Shopping EP3 PHP Library",
+    "keywords":["Naver Shopping","ep3","nshop ep"],
+    "type":"library",
+    "license":"BSD-2.0",
+    "authors":[
+        {
+            "name":"Jonathan Bak",
+            "email": "jonathanbak@gmail.com",
+            "homepage":"https://devlog.o2i.cc"
+        }
+    ],
+    "homepage": "http://github.com/jonathanbak/NaverShopEp",
+    "require":{
+        "php":">=7.3.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit":"~9.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "NaverShopEp\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "NaverShopEpTest\\": "tests/"
+        }
+    }
+}

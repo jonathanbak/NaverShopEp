@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd"
+         bootstrap="./vendor/autoload.php">
+    <testsuites>
+        <testsuite name="Model Test Suite">
+            <directory>./tests</directory>
+        </testsuite>
+    </testsuites>
+
+    <php>
+        <var name="DB_HOST" value="localhost" />
+        <var name="DB_USER" value="test" />
+        <var name="DB_PASSWD" value="test1234" />
+        <var name="DB_NAME" value="db_test" />
+        <var name="DB_PORT" value="3306" />
+    </php>
+</phpunit>
