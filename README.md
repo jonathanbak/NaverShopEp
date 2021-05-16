@@ -6,7 +6,7 @@
 
 ## Install
 ```bash
-$ composer install NaverShopEp
+$ composer require jonathanbak/navershopep
 ```
 
 ## Start
