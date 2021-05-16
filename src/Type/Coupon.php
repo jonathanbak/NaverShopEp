@@ -18,6 +18,6 @@ use NaverShopEp\Type as TypeAbstract;
 class Coupon extends TypeAbstract
 {
     protected $_maxSize = 100;
-    protected $_condition = '([0-9]+원|%)(\^[0-9]{1,2})?';
+    protected $_condition = '([0-9]+원|%)?(\^[0-9]{1,2})?';
     protected $_conditionExcept = '[\t\n]+';    //탭, 엔터문자 사용금지
 }

@@ -18,5 +18,5 @@ class Image_link extends TypeAbstract
 {
     protected $_required = true;
     protected $_maxsize = 255;
-    protected $_condition = '(http:\/\/[a-zA-Z.0-9&%=#\?\/-_]+)';
+    protected $_condition = '(https?:\/\/[a-zA-Z.0-9&%=#\?\/-_]+)';
 }
