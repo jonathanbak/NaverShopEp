@@ -16,8 +16,8 @@ class ShopLists extends AbstractLists {
      */
     public function queryAll()
     {
-        $query = "SELECT s_idx as uid, s_goods_name, s_img_url, s_price, IF(s_stock>0,1,0) as is_stock, s_status, s_last_update,
-                        md5(CONCAT(s_goods_name, s_img_url, s_price, s_status, IF(s_stock>0,1,0))) as item_hash
+        $query = "SELECT s_idx as uid, s_goods_name, s_category, s_img_url, s_price, IF(s_stock>0,1,0) as is_stock, s_status, s_last_update,
+                        md5(CONCAT(s_goods_name, s_category, s_img_url, s_price, s_status, IF(s_stock>0,1,0))) as item_hash
                 FROM shop_item WHERE s_status = 1 AND s_nshop_flag = 'Y' ORDER BY s_idx ASC LIMIT 10
                 ";
         return $query;
@@ -37,7 +37,7 @@ class ShopItem extends AbstractItem {
 
     public function getCategory_name1()
     {
-        return '카테고리1';
+        return $this->data['s_category'];
     }
 
     public function getImage_link()

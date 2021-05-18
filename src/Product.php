@@ -42,8 +42,7 @@ class Product
         $NaverShopProduct->setMobile_link($ShopProduct->getMobile_link());//모바일 상품 URL
         $NaverShopProduct->setImage_link($ShopProduct->getImage_link());//이미지 URL
 //        $NaverShopProduct->setAdd_image_link( "" );//추가 이미지 URL |로 구분하여 입력
-        if(method_exists($ShopProduct, 'getNormal_price'))
-            $NaverShopProduct->setCategory_name1($ShopProduct->getCategory_name1());//업체 카테고리명 (대분류)
+        $NaverShopProduct->setCategory_name1($ShopProduct->getCategory_name1());//업체 카테고리명 (대분류)
         if(method_exists($ShopProduct, 'getCategory_name2'))
             $NaverShopProduct->setCategory_name2($ShopProduct->getCategory_name2());//업체 카테고리명 (중분류) (미존재시 공란)
         if(method_exists($ShopProduct, 'getCategory_name3'))

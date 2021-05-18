@@ -43,7 +43,7 @@ abstract class Type
     {
         if ($this->_required !== null) {
             if ($this->_required === true) {
-                if ($value === null || $value === self::NULL) {
+                if ($value === null || $value === self::NULL || $value === self::NONE) {
                     $className = get_class($this);
                     throw new Exception("필수입력값을 입력하지 않았습니다. (".$className.")");
                 }

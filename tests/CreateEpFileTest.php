@@ -24,8 +24,8 @@ class ShopLists extends AbstractLists {
      */
     public function queryAll()
     {
-        $query = "SELECT s_idx as uid, s_goods_name, s_img_url, s_price, IF(s_stock>0,1,0) as is_stock, s_status, s_last_update,
-                        md5(CONCAT(s_goods_name, s_img_url, s_price, s_status, IF(s_stock>0,1,0))) as item_hash
+        $query = "SELECT s_idx as uid, s_goods_name, s_category, s_img_url, s_price, IF(s_stock>0,1,0) as is_stock, s_status, s_last_update,
+                        md5(CONCAT(s_goods_name, s_category, s_img_url, s_price, s_status, IF(s_stock>0,1,0))) as item_hash
                 FROM shop_item WHERE s_status = 1 AND s_nshop_flag = 'Y' ORDER BY s_idx ASC LIMIT 10
                 ";
         return $query;
@@ -45,7 +45,7 @@ class ShopItem extends AbstractItem {
 
     public function getCategory_name1()
     {
-        return '카테고리1';
+        return $this->data['s_category'];
     }
 
     public function getImage_link()
@@ -147,11 +147,11 @@ class CreateEpFileTest extends \PHPUnit\Framework\TestCase
         self::$dbConn->query($query);
 
         //추가
-        $query = "INSERT INTO shop_item (s_idx, s_goods_name, s_img_url, s_price, s_stock, s_status, s_nshop_flag, s_last_update)
+        $query = "INSERT INTO shop_item (s_idx, s_goods_name, s_category, s_img_url, s_price, s_stock, s_status, s_nshop_flag, s_last_update)
                     values
-                    ('7','상품7','/image/goods/7.jpg','11000','20','1','Y',now()),
-                    ('8','상품8','/image/goods/8.jpg','12300','10','1','Y',now()),
-                    ('9','상품9','/image/goods/9.jpg','1100','30','1','Y',now())";
+                    ('7','상품7','카테7','/image/goods/7.jpg','11000','20','1','Y',now()),
+                    ('8','상품8','카테7','/image/goods/8.jpg','12300','10','1','Y',now()),
+                    ('9','상품9','카테7','/image/goods/9.jpg','1100','30','1','Y',now())";
         self::$dbConn->query($query);
 
         $this->assertTrue(true);
@@ -246,13 +246,13 @@ class CreateEpFileTest extends \PHPUnit\Framework\TestCase
         //수정 복구
         $query = "UPDATE shop_item SET s_img_url = '/image/goods/3.jpg', s_last_update = '2021-05-15 05:55:00' WHERE s_idx = 3";
         self::$dbConn->query($query);
-        $query = "UPDATE nshop_epitem SET ne_item_hash = (SELECT md5(CONCAT(s_goods_name, s_img_url, s_price, s_status, IF(s_stock>0,1,0))) FROM shop_item WHERE s_idx = 3) WHERE ne_uid = 3";
+        $query = "UPDATE nshop_epitem SET ne_item_hash = (SELECT md5(CONCAT(s_goods_name, s_category, s_img_url, s_price, s_status, IF(s_stock>0,1,0))) FROM shop_item WHERE s_idx = 3) WHERE ne_uid = 3";
         self::$dbConn->query($query);
 
         //재고 품절 복구
         $query = "UPDATE shop_item SET s_stock = 10 WHERE s_idx = 4";
         self::$dbConn->query($query);
-        $query = "UPDATE nshop_epitem SET ne_item_hash = (SELECT md5(CONCAT(s_goods_name, s_img_url, s_price, s_status, IF(s_stock>0,1,0))) FROM shop_item WHERE s_idx = 4) WHERE ne_uid = 4";
+        $query = "UPDATE nshop_epitem SET ne_item_hash = (SELECT md5(CONCAT(s_goods_name, s_category, s_img_url, s_price, s_status, IF(s_stock>0,1,0))) FROM shop_item WHERE s_idx = 4) WHERE ne_uid = 4";
         self::$dbConn->query($query);
 
         //추가 삭제
